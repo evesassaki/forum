@@ -1,0 +1,41 @@
+{% load static %}
+<header class="header header--loggedIn">
+  <div class="container">
+    <a href="{% url 'home' %}" class="header__logo">
+      <img src="{% static 'images/logo.png' %}" />
+      <h1>Forum</h1>
+    </a>
+    <form class="header__search" method="GET" action="{% url 'home' %}">
+      <label>
+        <input name="q" placeholder="Search for posts" />
+      </label>
+    </form>
+    <nav class="header__menu">
+      <!-- Logged In -->
+      {% if request.user.is_authenticated %}
+      <div class="header__user">
+        <a href="{% url 'update-user' %}">
+          <div class="avatar avatar--medium active">
+            <img src="{{request.user.avatar.url}}" />
+          </div>
+          <p>
+            {{request.user.username}} <span>@{{request.user.username}}</span>
+          </p>
+        </a>
+
+        <div>
+          <a href="{% url 'update-user' %}" class="dropdown-link"> Settings</a>
+          <a href="{% url 'logout' %}" class="dropdown-link"> Logout</a>
+        </div>
+      </div>
+      {% else %}
+
+      <!-- Not Logged In -->
+      <a href="{% url 'login' %}">
+        <img src="{% static 'images/avatar.png' %}" />
+        <p>Login</p>
+      </a>
+      {% endif %}
+    </nav>
+  </div>
+</header>

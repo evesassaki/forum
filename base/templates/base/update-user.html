@@ -1,0 +1,31 @@
+{% extends 'main.html' %} {% block content %}
+<main class="update-account layout">
+  <div class="container">
+    <div class="layout_box">
+      <div class="layout_boxHeader">
+        <div class="layout_boxTitle">
+          <a href="{% url 'home' %}">
+            <title>arrow-left</title>
+          </a>
+          <h3>Edit your profile</h3>
+        </div>
+      </div>
+      <div class="layout_body">
+        <form class="form" method="POST" enctype="multipart/form-data">
+          {% csrf_token %} {% for field in form %}
+          <div class="form__group">
+            <label for="profile_pic">{{field.label}}</label>
+            {{field}}
+          </div>
+          {% endfor %}
+
+          <div class="form__action">
+            <a class="btn btn--dark" href="index.html">Cancel</a>
+            <button class="btn btn--main" type="submit">Update</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock content %}
